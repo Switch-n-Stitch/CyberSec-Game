@@ -1,3 +1,6 @@
+// Remember that this is running on p5.JS 
+
+
 var bezzel = 50;
 var input;
 

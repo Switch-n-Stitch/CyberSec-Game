@@ -1,0 +1,164 @@
+// What I'm planning to do here is work out the code to make the computer work out a 4 digit password and link it to an input box.
+//I guess the imput box will simply check the output of the code to check if input === code output
+
+//Sources : 
+// https://stackoverflow.com/questions/29640432/generate-4-digit-random-number-using-substring/29640472 -- random 4 digit number between 0 and 9999
+// https://editor.p5js.org/fergfluff/sketches/HkAydbxiZ  --- mouseIsClicked vs mouseIsPressed 
+
+
+const randomFourDigit = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+var input;
+let finalUserPasscode = 0000;
+
+
+
+function setup() {
+	
+	createCanvas(windowWidth, windowHeight);
+	background(100);
+	
+	input = createInput();
+	
+	print("randomFourDigit " + randomFourDigit);
+	
+	var finalTimePull = 0;
+	
+	// Not true (actual reason - The reason that the timing is not working here is because the for loop loops through the full 0 to 100000 when it prints the first time signature. then it gets to 100000 and start
+		
+		for ( let computerPasswordCounter = 0 ; computerPasswordCounter < 10000 ; computerPasswordCounter++) {
+			
+			const startTime = second();
+			//print("startTime " + startTime);
+			print("computerPasswordCounter " + computerPasswordCounter);
+			//print("randomFourDigit " + randomFourDigit);
+			//print(typeof(randomFourDigit));
+			var integer = parseInt(randomFourDigit, 10);
+			
+			if (computerPasswordCounter === integer){
+				print("cracked :" + computerPasswordCounter);
+				print("randomFourDigit" + randomFourDigit);
+				const stopTime = second();		
+				finalTime = startTime - stopTime;	
+				//print("final time : " + finalTime);
+				//finalTimePull.push(finalTime);
+				break;
+			}
+			
+			//print(finalTimePull)
+		
+		//print("finaltime " + finalTime);
+			
+		
+		}	
+	
+	// password box created here
+		passwordInput = createInput();
+		passwordInput.changed(newText);
+		passwordInput.position(120, 145);
+	
+		// This allows me to record text entered in the text boxs
+		function newText() {
+			//print(userNameInput.value());
+			print(passwordInput.value());
+			finalUserPasscode = passwordInput.value()
+		}
+	
+	print("finalUserPasscode " + finalUserPasscode);
+	
+
+	
+}
+
+
+// Need to define this in the global scope rather than in the mouseIsPressed function as it resets every time mouse is pressed 
+var incorrectCounter = 0 ; 
+var passcodeAttemptsLeft = 4;
+
+
+function mousePressed() {
+	
+	
+	
+	if ((mouseX > 100 && mouseX < 150) && ( mouseY > 100 && mouseY < 120)) {
+	clicked();
+		
+	
+	
+		if (finalUserPasscode === randomFourDigit) {
+			print("Correct Passcode");
+		} else {
+			print("Incorrect Passcode, " + (passcodeAttemptsLeft - incorrectCounter) + " tries left");
+			incorrectCounter++;
+			print(incorrectCounter);
+		}	
+		
+		if (incorrectCounter > 3) {
+			fill(238,210,2);
+			rect( 500,500,200,100);
+			fill(0,0,0);
+			text("Click here to crack passcode..", 500, 550);
+	
+		
+			
+		
+	}
+		
+			// This doesn't seem to be running, I cant get anything to print out. I was trying to change the scope of this in relation to potentailly the setup function (however I'm not 100% sure it should be in setup)
+			
+			
+			
+	}};
+
+
+function clicked() {
+	
+	print("clicked");
+	fill(255,255,255);
+	rect( 100 , 100 , 50 , 20); 
+	
+}; 
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function draw() {
+	
+	//text("x: " + mouseX , mouseX + 5, mouseY);
+	//text("y: " + mouseY , mouseX + 5, mouseY + 10);
+	
+}
+
+
+/*
+
+	function randomNum(max) {
+  return Math.floor(Math.random() * max);
+
+	
+	var fourDigitPasscode = [randomNum(9),randomNum(9),randomNum(9),randomNum(9)];
+	print(fourDigitPasscode);
+	
+	
+	for ( var fourIndex = 0 ; fourIndex < 5 ; fourIndex++ ) {
+		
+		print(fourDigitPasscode[fourIndex]);
+		
+		
+	}
+
+}
+
+*/

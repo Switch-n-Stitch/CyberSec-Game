@@ -1,0 +1,165 @@
+var bezzel = 50;
+var input;
+
+
+
+
+function setup() {
+
+	// This is where I create and style the input box for userName
+	noCanvas();
+	
+
+
+	createCanvas(windowWidth, windowHeight);
+	background(0, 128, 128);
+	input = createInput();
+	
+	//This is how I pull data from the input
+	input.value(); 
+	
+	
+
+	// This sets out the four corners of the screen 
+	// TBLR (Top,Bottom,Left,Right) WH(Width,Height) - I have created variables outside of the rects to then factor into my rects to make sure that that they are all responsive to the overall widthHeight and width
+	
+	var outerBoxLRW = windowWidth / 33; 
+	var outerBoxTBH = windowHeight / 17.8; 
+	
+	fill(213, 213, 213)
+	rect(0, 0, windowWidth, outerBoxTBH); // T
+	rect(0, (windowHeight - outerBoxTBH), windowWidth, outerBoxTBH); //B
+	rect(0, outerBoxTBH, outerBoxLRW, windowHeight); //L
+	rect(windowWidth - outerBoxLRW, outerBoxTBH, outerBoxLRW, windowHeight); // R 
+
+
+	// This sets out the passcode box in the middle 
+	
+	var boxLength = 500 ;
+	var boxHeight = 200 ;
+	
+	var innerBoxX = (windowWidth - boxLength ) / 2;
+	var innerBoxY = (windowHeight / 3) ;
+	
+	var textY = 0;
+
+	
+	var buttonWidth = 100;
+	var buttonHeight = 30;
+	
+	var welcomeOffset = 30 ; 
+	var heightOffset = 3;
+	
+		print("H " +  windowHeight);
+		print("W " + windowWidth);
+	
+	
+	// I've put this in an if statement as if the screensize gets to small then it no longer displays the box properly. I may want to put a popup if screenSize too small. 
+	if ((windowWidth > 500) && (windowHeight > 460)) {
+		
+		// innerBox
+			rect( innerBoxX , innerBoxY  , boxLength, boxHeight); 
+		
+		// innerBox header 
+			fill(48, 130, 207);
+			rect( innerBoxX , innerBoxY , boxLength, boxHeight / 10); 
+		
+		// 'welcome' text
+			fill(255, 255, 255);
+			text('Welcome to Windows', innerBoxX + welcomeOffset , innerBoxY + 15 ); 
+		
+		// This creates the text for userName
+			fill(0, 0, 0);
+			text('User name: ', innerBoxX + welcomeOffset, innerBoxY + 118  );
+		
+		// This creates the text for password
+			fill(0, 0, 0);
+			text('Password: ', innerBoxX + welcomeOffset, innerBoxY + 158 );
+
+		// This creates the text above input boxes
+			fill(0, 0, 0);
+			text('Type a user name and password to log on to Windows.', innerBoxX + welcomeOffset, innerBoxY + 72);
+
+		// 'ok' button
+			fill(213, 213, 213);
+			strokeWeight(1.3);
+			rect(innerBoxX + 370 , innerBoxY + 72 , buttonWidth, buttonHeight);
+			fill(0, 0, 0);
+			text('OK', innerBoxX + 409 ,  innerBoxY + 92 );
+
+		// 'cancel' button
+			fill(213, 213, 213);
+			strokeWeight(1.3);
+			rect( innerBoxX + 370 , innerBoxY + 126, buttonWidth, buttonHeight);
+			fill(0, 0, 0);
+			text('Cancel', innerBoxX + 400 , innerBoxY + 146);
+		
+		
+		// userName box created here
+			userNameInput = createInput();
+			userNameInput.changed(newText);
+			userNameInput.position(innerBoxX + 120 , innerBoxY + 105 ); //Need to try and make all of the x positions relative to the overall screen size. Same with height / y co-ordinates 
+	
+		// password box created here
+			passwordInput = createInput();
+			passwordInput.changed(newText);
+			passwordInput.position(innerBoxX + 120, innerBoxY + 145);
+		
+		// This allows me to record text entered in the text boxs
+			function newText() {
+			print(userNameInput.value());
+			print(passwordInput.value());
+}
+		
+	} else {
+		
+		
+		
+	};
+	
+	
+	
+	
+	
+
+function mouseMoved () {
+	let cursorColor = (255, 255, 255);
+	//for ( let tracerCounter = 0; tracerCounter < 10 ; tracerCounter++){
+						fill(cursorColor);
+						cursorColor = (255, 255, 255);
+						fill(cursorColor);
+						ellipse(mouseX, mouseY, 20, 20);
+		
+						//if (tracerCounter < 5) {
+						//	cursorColor = (0, 128, 128);
+						//	ellipse(mouseX, mouseY, 20, 20);
+						//}
+	
+}}
+
+
+	
+	
+
+	var mouseOver = function() {
+
+		if ((mouseX >= 0 && mouseX <= 500) && (mouseY >= 100 && mouseY <= 500) ) {
+			text('working', 100, 100);
+			cursorColor = (255, 0, 0)
+			//fill(rectColor);
+			//rect(100,100,100,100);  
+
+		}
+	}
+	print("width" + windowWidth);
+	mouseOver();
+
+
+
+
+
+
+
+
+
+
